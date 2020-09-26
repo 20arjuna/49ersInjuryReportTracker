@@ -1,5 +1,6 @@
 import requests
 from bs4 import BeautifulSoup
+import pandas as pd
 
 url = 'https://www.49ers.com/team/injury-report/'
 
@@ -27,13 +28,16 @@ for tbody in injury_table.find_all('tbody'):
 
 
                 for ahref in playerHTML.find_all('a'):
-                    print("player name: " + ahref.text.strip())
+                    #print("player name: " + ahref.text.strip())
                     temp.append(ahref.text.strip())
             else:
-                print(column[j].text)
+                #print(column[j].text)
                 temp.append(column[j].text.strip())
 
         injuryMatrix.append(temp)
         #print(temp)
 
-print(injuryMatrix)
+#print(injuryMatrix)
+df = pd.DataFrame(injuryMatrix)
+df.columns = ['Name', 'Position', 'Injury', 'Wednesday', 'Thursday', 'Friday', 'Game Status']
+print(df)
