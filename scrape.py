@@ -10,18 +10,23 @@ injury_table = soup.find('table', class_ = 'd3-o-table d3-o-table--row-striping'
 
 #print(injury_table)
 
+injuryMatrix = [[]]
 for tbody in injury_table.find_all('tbody'):
-    for player in tbody.find_all('tr'):
-        column = player.find_all('td')
-        for i in range(len(column)):
-            if(i==0):
+    player = tbody.find_all('tr')
+    for i in range(len(player)):
+        column = player[i].find_all('td')
+        for j in range(len(column)):
+            if(j==0):
                 #print(column[i])
 
-                newSoup = BeautifulSoup(str(column[i]), 'html.parser')
+                newSoup = BeautifulSoup(str(column[j]), 'html.parser')
                 playerHTML = newSoup.find('span', class_ = 'd3-o-player-roster__player-name')
 
 
                 for ahref in playerHTML.find_all('a'):
                     print("player name: " + ahref.text.strip())
+                    injuryMatrix.append(ahref.text.strip())
             else:
-                print(column[i].text)
+                print(column[j].text)
+                injuryMatrix.append(column[j].text.strip())
+    i
