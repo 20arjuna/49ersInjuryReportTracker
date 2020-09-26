@@ -10,12 +10,15 @@ injury_table = soup.find('table', class_ = 'd3-o-table d3-o-table--row-striping'
 
 #print(injury_table)
 
-injuryMatrix = [[]]
+injuryMatrix = []
 for tbody in injury_table.find_all('tbody'):
+
     player = tbody.find_all('tr')
     for i in range(len(player)):
         column = player[i].find_all('td')
+        temp = []
         for j in range(len(column)):
+
             if(j==0):
                 #print(column[i])
 
@@ -25,8 +28,12 @@ for tbody in injury_table.find_all('tbody'):
 
                 for ahref in playerHTML.find_all('a'):
                     print("player name: " + ahref.text.strip())
-                    injuryMatrix.append(ahref.text.strip())
+                    temp.append(ahref.text.strip())
             else:
                 print(column[j].text)
-                injuryMatrix.append(column[j].text.strip())
-    i
+                temp.append(column[j].text.strip())
+
+        injuryMatrix.append(temp)
+        #print(temp)
+
+print(injuryMatrix)
